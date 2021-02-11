@@ -55,6 +55,7 @@ namespace CashRegister
             this.tenderErrorLabel = new System.Windows.Forms.Label();
             this.calculateOrderButton = new System.Windows.Forms.Button();
             this.totalPriceLabel = new System.Windows.Forms.Label();
+            this.changeButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -244,6 +245,7 @@ namespace CashRegister
             this.tenderedInput.Name = "tenderedInput";
             this.tenderedInput.Size = new System.Drawing.Size(113, 20);
             this.tenderedInput.TabIndex = 27;
+            this.tenderedInput.TextChanged += new System.EventHandler(this.tenderedInput_TextChanged);
             // 
             // label2
             // 
@@ -273,9 +275,9 @@ namespace CashRegister
             // tenderErrorLabel
             // 
             this.tenderErrorLabel.BackColor = System.Drawing.Color.Transparent;
-            this.tenderErrorLabel.Location = new System.Drawing.Point(139, 368);
+            this.tenderErrorLabel.Location = new System.Drawing.Point(219, 348);
             this.tenderErrorLabel.Name = "tenderErrorLabel";
-            this.tenderErrorLabel.Size = new System.Drawing.Size(249, 32);
+            this.tenderErrorLabel.Size = new System.Drawing.Size(103, 24);
             this.tenderErrorLabel.TabIndex = 31;
             this.tenderErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
@@ -297,12 +299,23 @@ namespace CashRegister
             this.totalPriceLabel.TabIndex = 33;
             this.totalPriceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // changeButton
+            // 
+            this.changeButton.Location = new System.Drawing.Point(138, 338);
+            this.changeButton.Name = "changeButton";
+            this.changeButton.Size = new System.Drawing.Size(64, 44);
+            this.changeButton.TabIndex = 34;
+            this.changeButton.Text = "Calculate Change";
+            this.changeButton.UseVisualStyleBackColor = true;
+            this.changeButton.Click += new System.EventHandler(this.changeButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::CashRegister.Properties.Resources._213;
             this.ClientSize = new System.Drawing.Size(527, 409);
+            this.Controls.Add(this.changeButton);
             this.Controls.Add(this.totalPriceLabel);
             this.Controls.Add(this.calculateOrderButton);
             this.Controls.Add(this.tenderErrorLabel);
@@ -363,6 +376,7 @@ namespace CashRegister
         private System.Windows.Forms.Label tenderErrorLabel;
         private System.Windows.Forms.Button calculateOrderButton;
         private System.Windows.Forms.Label totalPriceLabel;
+        private System.Windows.Forms.Button changeButton;
     }
 }
 

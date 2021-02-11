@@ -50,6 +50,7 @@ namespace CashRegister
             mushroomButton.Enabled = false;
             onionButton.Enabled = false;
             printreceiptButton.Enabled = true;
+            printreceiptButton.Enabled = false;
         }
 
         // If the size buttons are clicked, It adds the size price to the receipt, and writes the size name
@@ -165,141 +166,90 @@ namespace CashRegister
             subtotal += toppingPrice;
         }
 
-        // resets the receipt strings if the button is clicked, checks values in text box
+        //  if the button is clicked, it resets the receipt strings just incase, and prints out the information
         private void calculateButton_Click(object sender, EventArgs e)
         {
-            try
-            {
-                printreceiptButton.Enabled = true;
-                calculateOrderButton.Enabled = false;
-                receiptLabel.Text = "";
-                pricingLabel.Text = "";
 
-                tendered = Convert.ToDouble(tenderedInput.Text);
+            tendered = Convert.ToDouble(tenderedInput.Text);
+            receiptLabel.Visible = true;
+            pricingLabel.Visible = true;
+            smallButton.Enabled = false;
+            medButton.Enabled = false;
+            lrgButton.Enabled = false;
+            pepperoniButton.Enabled = false;
+            extrachzButton.Enabled = false;
+            greenpepperButton.Enabled = false;
+            pineappleButton.Enabled = false;
+            mushroomButton.Enabled = false;
+            onionButton.Enabled = false;
+            receipttitleLabel.Visible = true;
+            SoundPlayer player = new SoundPlayer(Properties.Resources.receipt1);
+            player.PlayLooping();
+            receipttitleLabel.Text += $"\nRECEIPT\n";
+            Thread.Sleep(100);
+            Refresh();
+            receipttitleLabel.Text += DateTime.Now.ToString("dd/MM/yy");
+            Thread.Sleep(100);
+            Refresh();
+            receipttitleLabel.Text += $"\nPINOS PIZZA";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\n{numberOfPizza} {size} PIZZA\n";
+            pricingLabel.Text += $"\n{sizePrice}\n";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nPeperoni x{pepperoni}";
+            pricingLabel.Text += $"\n{pepperoni * toppingPrice}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nExtra Cheese x{extracheese}";
+            pricingLabel.Text += $"\n{extracheese * toppingPrice}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nGreen Peppers x{greenpeppers}";
+            pricingLabel.Text += $"\n{greenpeppers * toppingPrice}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nPineapple x{pineapple}";
+            pricingLabel.Text += $"\n{pineapple * toppingPrice}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nMushrooms x{mushroom}";
+            pricingLabel.Text += $"\n{mushroom * toppingPrice}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nOnions x{onions}";
+            pricingLabel.Text += $"\n{onions * toppingPrice}";
+            Thread.Sleep(100);
+            Refresh();
+            Convert.ToString(change);
+            tendered = Convert.ToDouble(tenderedInput.Text);
+            change = tendered - total;
+            receiptLabel.Text += $"\n\n\n\n\n\n\nSubtotal";
+            pricingLabel.Text += $"\n\n\n\n\n\n\n{subtotal.ToString("C")}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nTax";
+            pricingLabel.Text += $"\n{taxCharge.ToString("C")}";
+            Thread.Sleep(100);
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nTotal\n";
+            pricingLabel.Text += $"\n{total.ToString("C")}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\n\nTendered";
+            pricingLabel.Text += $"\n\n\n{tendered.ToString("C")}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nChange";
+            pricingLabel.Text += $"\n{change.ToString("C")}";
+            Thread.Sleep(100);
+            Refresh();
+            receiptLabel.Text += $"\nHave A Nice Day!";
+            player.Stop();
+            Refresh();
 
-                // sets TOTAL and SUBTOTAL to their values
-                total = subtotal * tax;
-                taxCharge = subtotal * tax - subtotal;
-
-                // if theres a value that is less than the total, it displays a message
-                if (tendered < total)
-                {
-                    tendered = Convert.ToDouble(tenderedInput.Text);
-                    tenderErrorLabel.Text = "Invalid Change! Please place a new order!";
-                    receiptLabel.Enabled = false;
-                    smallButton.Enabled = false;
-                    medButton.Enabled = false;
-                    lrgButton.Enabled = false;
-                    pepperoniButton.Enabled = false;
-                    extrachzButton.Enabled = false;
-                    greenpepperButton.Enabled = false;
-                    pineappleButton.Enabled = false;
-                    mushroomButton.Enabled = false;
-                    onionButton.Enabled = false;
-                    tenderedInput.Text = "";
-                }
-
-                // If there IS a value in the tendered section, It calculates the total and writes it out to the receipt and plays the receipt noise.
-                else
-                {
-                    tendered = Convert.ToDouble(tenderedInput.Text);
-                    receiptLabel.Visible = true;
-                    pricingLabel.Visible = true;
-                    smallButton.Enabled = false;
-                    medButton.Enabled = false;
-                    lrgButton.Enabled = false;
-                    pepperoniButton.Enabled = false;
-                    extrachzButton.Enabled = false;
-                    greenpepperButton.Enabled = false;
-                    pineappleButton.Enabled = false;
-                    mushroomButton.Enabled = false;
-                    onionButton.Enabled = false;
-                    receipttitleLabel.Visible = true;
-                    SoundPlayer player = new SoundPlayer(Properties.Resources.receipt1);
-                    player.PlayLooping();
-                    receipttitleLabel.Text += $"\nRECEIPT\n";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receipttitleLabel.Text += DateTime.Now.ToString("dd/MM/yy");
-                    Thread.Sleep(100);
-                    Refresh();
-                    receipttitleLabel.Text += $"\nPINOS PIZZA";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\n{numberOfPizza} {size} PIZZA\n";
-                    pricingLabel.Text += $"\n{sizePrice}\n";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nPeperoni x{pepperoni}";
-                    pricingLabel.Text += $"\n{pepperoni * toppingPrice}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nExtra Cheese x{extracheese}";
-                    pricingLabel.Text += $"\n{extracheese * toppingPrice}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nGreen Peppers x{greenpeppers}";
-                    pricingLabel.Text += $"\n{greenpeppers * toppingPrice}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nPineapple x{pineapple}";
-                    pricingLabel.Text += $"\n{pineapple * toppingPrice}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nMushrooms x{mushroom}";
-                    pricingLabel.Text += $"\n{mushroom * toppingPrice}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nOnions x{onions}";
-                    pricingLabel.Text += $"\n{onions * toppingPrice}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    Convert.ToString(change);
-                    tendered = Convert.ToDouble(tenderedInput.Text);
-                    change = tendered - total;
-                    receiptLabel.Text += $"\n\n\n\n\n\n\nSubtotal";
-                    pricingLabel.Text += $"\n\n\n\n\n\n\n{subtotal.ToString("C")}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nTax";
-                    pricingLabel.Text += $"\n{taxCharge.ToString("C")}";
-                    Thread.Sleep(100);
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nTotal\n";
-                    pricingLabel.Text += $"\n{total.ToString("C")}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\n\nTendered";
-                    pricingLabel.Text += $"\n\n\n{tendered.ToString("C")}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nChange";
-                    pricingLabel.Text += $"\n{change.ToString("C")}";
-                    Thread.Sleep(100);
-                    Refresh();
-                    receiptLabel.Text += $"\nHave A Nice Day!";
-                    player.Stop();
-                    Refresh();
-                }
-            }
-            // checks to see if there is a value entered in the tendered section. If there is none, it sets everything back to the way the program starts
-            catch
-            {
-                tenderedInput.Text = "0";
-                tenderErrorLabel.Text = "Invalid Change! Please place a new order!";
-                receiptLabel.Enabled = false;
-                smallButton.Enabled = false;
-                medButton.Enabled = false;
-                lrgButton.Enabled = false;
-                pepperoniButton.Enabled = false;
-                extrachzButton.Enabled = false;
-                greenpepperButton.Enabled = false;
-                pineappleButton.Enabled = false;
-                mushroomButton.Enabled = false;
-                onionButton.Enabled = false;
-                tenderedInput.Text = "";
-            }
         }
 
         // if the new order button is clicked, it sets everything back to how it is at program run
@@ -335,6 +285,8 @@ namespace CashRegister
             size = "";
             sizePrice = 0;
             numberOfPizza = 0;
+            printreceiptButton.Enabled = false;
+            tenderedInput.Text = "";
         }
 
         // If the Calculate button is pressed, it sets the subtotal and total to their values, as well as displays the total
@@ -345,6 +297,58 @@ namespace CashRegister
             totalPriceLabel.Text = $"{total.ToString("C")}";
         }
 
+        private void tenderedInput_TextChanged(object sender, EventArgs e)
+        {
 
+        }
+
+        private void changeButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                tendered = Convert.ToDouble(tenderedInput.Text);
+                if (tendered < total)
+                {
+                    tendered = Convert.ToDouble(tenderedInput.Text);
+                    tenderErrorLabel.Text = "Invalid Change! Please place a new order!";
+                    receiptLabel.Enabled = false;
+                    smallButton.Enabled = false;
+                    medButton.Enabled = false;
+                    lrgButton.Enabled = false;
+                    pepperoniButton.Enabled = false;
+                    extrachzButton.Enabled = false;
+                    greenpepperButton.Enabled = false;
+                    pineappleButton.Enabled = false;
+                    mushroomButton.Enabled = false;
+                    onionButton.Enabled = false;
+                    tenderedInput.Text = "";
+                }
+
+                else
+                {
+                    tendered = Convert.ToDouble(tenderedInput.Text);
+                    change = tendered - total;
+                    tenderErrorLabel.Text = $"{change.ToString("C")}";
+                    printreceiptButton.Enabled = true;
+                }
+            }
+            catch
+            {
+                tenderedInput.Text = "0";
+                tenderErrorLabel.Text = "Invalid Change! Please place a new order!";
+                receiptLabel.Enabled = false;
+                smallButton.Enabled = false;
+                medButton.Enabled = false;
+                lrgButton.Enabled = false;
+                pepperoniButton.Enabled = false;
+                extrachzButton.Enabled = false;
+                greenpepperButton.Enabled = false;
+                pineappleButton.Enabled = false;
+                mushroomButton.Enabled = false;
+                onionButton.Enabled = false;
+                tenderedInput.Text = "";
+            }
+            }
+        }
     }
-}
+
