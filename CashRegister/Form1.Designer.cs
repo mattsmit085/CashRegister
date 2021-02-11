@@ -44,16 +44,14 @@ namespace CashRegister
             this.button1 = new System.Windows.Forms.Button();
             this.neworderButton = new System.Windows.Forms.Button();
             this.receiptLabel = new System.Windows.Forms.Label();
-            this.onionLabel = new System.Windows.Forms.Button();
+            this.onionButton = new System.Windows.Forms.Button();
             this.greenpepperButton = new System.Windows.Forms.Button();
-            this.extrasLabel = new System.Windows.Forms.Label();
-            this.wingsButton = new System.Windows.Forms.Button();
-            this.garlicbreadButton = new System.Windows.Forms.Button();
-            this.saladButton = new System.Windows.Forms.Button();
             this.receipttitleLabel = new System.Windows.Forms.Label();
             this.tenderedInput = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pricingLabel = new System.Windows.Forms.Label();
+            this.pizzaSizeLabel = new System.Windows.Forms.Label();
+            this.tenderErrorLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -74,7 +72,7 @@ namespace CashRegister
             this.sizeLabel.BackColor = System.Drawing.Color.Transparent;
             this.sizeLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.sizeLabel.Location = new System.Drawing.Point(134, 51);
+            this.sizeLabel.Location = new System.Drawing.Point(213, 70);
             this.sizeLabel.Name = "sizeLabel";
             this.sizeLabel.Size = new System.Drawing.Size(47, 22);
             this.sizeLabel.TabIndex = 1;
@@ -82,7 +80,7 @@ namespace CashRegister
             // 
             // smallButton
             // 
-            this.smallButton.Location = new System.Drawing.Point(138, 76);
+            this.smallButton.Location = new System.Drawing.Point(168, 95);
             this.smallButton.Name = "smallButton";
             this.smallButton.Size = new System.Drawing.Size(43, 23);
             this.smallButton.TabIndex = 2;
@@ -92,7 +90,7 @@ namespace CashRegister
             // 
             // medButton
             // 
-            this.medButton.Location = new System.Drawing.Point(187, 76);
+            this.medButton.Location = new System.Drawing.Point(217, 95);
             this.medButton.Name = "medButton";
             this.medButton.Size = new System.Drawing.Size(43, 23);
             this.medButton.TabIndex = 3;
@@ -102,7 +100,7 @@ namespace CashRegister
             // 
             // lrgButton
             // 
-            this.lrgButton.Location = new System.Drawing.Point(236, 76);
+            this.lrgButton.Location = new System.Drawing.Point(266, 95);
             this.lrgButton.Name = "lrgButton";
             this.lrgButton.Size = new System.Drawing.Size(43, 23);
             this.lrgButton.TabIndex = 4;
@@ -116,7 +114,7 @@ namespace CashRegister
             this.toppingsLabel.BackColor = System.Drawing.Color.Transparent;
             this.toppingsLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
                 | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.toppingsLabel.Location = new System.Drawing.Point(134, 109);
+            this.toppingsLabel.Location = new System.Drawing.Point(191, 154);
             this.toppingsLabel.Name = "toppingsLabel";
             this.toppingsLabel.Size = new System.Drawing.Size(92, 22);
             this.toppingsLabel.TabIndex = 8;
@@ -124,7 +122,7 @@ namespace CashRegister
             // 
             // pepperoniButton
             // 
-            this.pepperoniButton.Location = new System.Drawing.Point(138, 139);
+            this.pepperoniButton.Location = new System.Drawing.Point(138, 179);
             this.pepperoniButton.Name = "pepperoniButton";
             this.pepperoniButton.Size = new System.Drawing.Size(64, 43);
             this.pepperoniButton.TabIndex = 9;
@@ -134,7 +132,7 @@ namespace CashRegister
             // 
             // extrachzButton
             // 
-            this.extrachzButton.Location = new System.Drawing.Point(208, 139);
+            this.extrachzButton.Location = new System.Drawing.Point(208, 179);
             this.extrachzButton.Name = "extrachzButton";
             this.extrachzButton.Size = new System.Drawing.Size(64, 43);
             this.extrachzButton.TabIndex = 10;
@@ -144,7 +142,7 @@ namespace CashRegister
             // 
             // pineappleButton
             // 
-            this.pineappleButton.Location = new System.Drawing.Point(138, 188);
+            this.pineappleButton.Location = new System.Drawing.Point(138, 228);
             this.pineappleButton.Name = "pineappleButton";
             this.pineappleButton.Size = new System.Drawing.Size(64, 43);
             this.pineappleButton.TabIndex = 11;
@@ -154,7 +152,7 @@ namespace CashRegister
             // 
             // mushroomButton
             // 
-            this.mushroomButton.Location = new System.Drawing.Point(208, 188);
+            this.mushroomButton.Location = new System.Drawing.Point(208, 228);
             this.mushroomButton.Name = "mushroomButton";
             this.mushroomButton.Size = new System.Drawing.Size(64, 43);
             this.mushroomButton.TabIndex = 12;
@@ -164,10 +162,11 @@ namespace CashRegister
             // 
             // orderLabel
             // 
-            this.orderLabel.Location = new System.Drawing.Point(12, 81);
+            this.orderLabel.Location = new System.Drawing.Point(12, 95);
             this.orderLabel.Name = "orderLabel";
-            this.orderLabel.Size = new System.Drawing.Size(121, 284);
+            this.orderLabel.Size = new System.Drawing.Size(121, 270);
             this.orderLabel.TabIndex = 14;
+            this.orderLabel.Click += new System.EventHandler(this.orderLabel_Click);
             // 
             // ordertitleLabel
             // 
@@ -198,6 +197,7 @@ namespace CashRegister
             this.neworderButton.TabIndex = 19;
             this.neworderButton.Text = "New Order";
             this.neworderButton.UseVisualStyleBackColor = true;
+            this.neworderButton.Click += new System.EventHandler(this.neworderButton_Click);
             // 
             // receiptLabel
             // 
@@ -207,67 +207,25 @@ namespace CashRegister
             this.receiptLabel.Size = new System.Drawing.Size(119, 270);
             this.receiptLabel.TabIndex = 17;
             // 
-            // onionLabel
+            // onionButton
             // 
-            this.onionLabel.Location = new System.Drawing.Point(278, 188);
-            this.onionLabel.Name = "onionLabel";
-            this.onionLabel.Size = new System.Drawing.Size(64, 43);
-            this.onionLabel.TabIndex = 21;
-            this.onionLabel.Text = "Onions";
-            this.onionLabel.UseVisualStyleBackColor = true;
-            this.onionLabel.Click += new System.EventHandler(this.onionLabel_Click);
+            this.onionButton.Location = new System.Drawing.Point(278, 228);
+            this.onionButton.Name = "onionButton";
+            this.onionButton.Size = new System.Drawing.Size(64, 43);
+            this.onionButton.TabIndex = 21;
+            this.onionButton.Text = "Onions";
+            this.onionButton.UseVisualStyleBackColor = true;
+            this.onionButton.Click += new System.EventHandler(this.onionLabel_Click);
             // 
             // greenpepperButton
             // 
-            this.greenpepperButton.Location = new System.Drawing.Point(278, 139);
+            this.greenpepperButton.Location = new System.Drawing.Point(278, 179);
             this.greenpepperButton.Name = "greenpepperButton";
             this.greenpepperButton.Size = new System.Drawing.Size(64, 43);
             this.greenpepperButton.TabIndex = 20;
             this.greenpepperButton.Text = "Green Peppers";
             this.greenpepperButton.UseVisualStyleBackColor = true;
             this.greenpepperButton.Click += new System.EventHandler(this.greenpepperButton_Click);
-            // 
-            // extrasLabel
-            // 
-            this.extrasLabel.AutoSize = true;
-            this.extrasLabel.BackColor = System.Drawing.Color.Transparent;
-            this.extrasLabel.Font = new System.Drawing.Font("Microsoft YaHei UI", 12F, ((System.Drawing.FontStyle)(((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic) 
-                | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.extrasLabel.Location = new System.Drawing.Point(138, 245);
-            this.extrasLabel.Name = "extrasLabel";
-            this.extrasLabel.Size = new System.Drawing.Size(64, 22);
-            this.extrasLabel.TabIndex = 22;
-            this.extrasLabel.Text = "Extras:";
-            // 
-            // wingsButton
-            // 
-            this.wingsButton.Location = new System.Drawing.Point(278, 274);
-            this.wingsButton.Name = "wingsButton";
-            this.wingsButton.Size = new System.Drawing.Size(64, 43);
-            this.wingsButton.TabIndex = 25;
-            this.wingsButton.Text = "Chicken Wings";
-            this.wingsButton.UseVisualStyleBackColor = true;
-            this.wingsButton.Click += new System.EventHandler(this.wingsButton_Click);
-            // 
-            // garlicbreadButton
-            // 
-            this.garlicbreadButton.Location = new System.Drawing.Point(208, 274);
-            this.garlicbreadButton.Name = "garlicbreadButton";
-            this.garlicbreadButton.Size = new System.Drawing.Size(64, 43);
-            this.garlicbreadButton.TabIndex = 24;
-            this.garlicbreadButton.Text = "Garlic Bread";
-            this.garlicbreadButton.UseVisualStyleBackColor = true;
-            this.garlicbreadButton.Click += new System.EventHandler(this.garlicbreadButton_Click);
-            // 
-            // saladButton
-            // 
-            this.saladButton.Location = new System.Drawing.Point(138, 274);
-            this.saladButton.Name = "saladButton";
-            this.saladButton.Size = new System.Drawing.Size(64, 43);
-            this.saladButton.TabIndex = 23;
-            this.saladButton.Text = "Caesar Salad";
-            this.saladButton.UseVisualStyleBackColor = true;
-            this.saladButton.Click += new System.EventHandler(this.saladButton_Click);
             // 
             // receipttitleLabel
             // 
@@ -303,21 +261,36 @@ namespace CashRegister
             this.pricingLabel.Size = new System.Drawing.Size(45, 273);
             this.pricingLabel.TabIndex = 29;
             // 
+            // pizzaSizeLabel
+            // 
+            this.pizzaSizeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.pizzaSizeLabel.Location = new System.Drawing.Point(12, 81);
+            this.pizzaSizeLabel.Name = "pizzaSizeLabel";
+            this.pizzaSizeLabel.Size = new System.Drawing.Size(120, 18);
+            this.pizzaSizeLabel.TabIndex = 30;
+            // 
+            // tenderErrorLabel
+            // 
+            this.tenderErrorLabel.BackColor = System.Drawing.Color.Transparent;
+            this.tenderErrorLabel.Location = new System.Drawing.Point(139, 368);
+            this.tenderErrorLabel.Name = "tenderErrorLabel";
+            this.tenderErrorLabel.Size = new System.Drawing.Size(249, 32);
+            this.tenderErrorLabel.TabIndex = 31;
+            this.tenderErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::CashRegister.Properties.Resources._213;
             this.ClientSize = new System.Drawing.Size(527, 409);
+            this.Controls.Add(this.tenderErrorLabel);
+            this.Controls.Add(this.pizzaSizeLabel);
             this.Controls.Add(this.pricingLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.tenderedInput);
             this.Controls.Add(this.receipttitleLabel);
-            this.Controls.Add(this.wingsButton);
-            this.Controls.Add(this.garlicbreadButton);
-            this.Controls.Add(this.saladButton);
-            this.Controls.Add(this.extrasLabel);
-            this.Controls.Add(this.onionLabel);
+            this.Controls.Add(this.onionButton);
             this.Controls.Add(this.greenpepperButton);
             this.Controls.Add(this.neworderButton);
             this.Controls.Add(this.receiptLabel);
@@ -359,16 +332,14 @@ namespace CashRegister
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button neworderButton;
         private System.Windows.Forms.Label receiptLabel;
-        private System.Windows.Forms.Button onionLabel;
+        private System.Windows.Forms.Button onionButton;
         private System.Windows.Forms.Button greenpepperButton;
-        private System.Windows.Forms.Label extrasLabel;
-        private System.Windows.Forms.Button wingsButton;
-        private System.Windows.Forms.Button garlicbreadButton;
-        private System.Windows.Forms.Button saladButton;
         private System.Windows.Forms.Label receipttitleLabel;
         private System.Windows.Forms.TextBox tenderedInput;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label pricingLabel;
+        private System.Windows.Forms.Label pizzaSizeLabel;
+        private System.Windows.Forms.Label tenderErrorLabel;
     }
 }
 
