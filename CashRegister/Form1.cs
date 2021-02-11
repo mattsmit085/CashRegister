@@ -192,7 +192,7 @@ namespace CashRegister
                     tenderedInput.Text = "";
                 }
 
-                // If there IS a value in the tendered section, It calculates the total and writes it out to the receipt.
+                // If there IS a value in the tendered section, It calculates the total and writes it out to the receipt and plays the receipt noise.
                 else
                 {
                     tendered = Convert.ToDouble(tenderedInput.Text);
@@ -209,8 +209,7 @@ namespace CashRegister
                     onionButton.Enabled = false;
                     receipttitleLabel.Visible = true;
                     SoundPlayer player = new SoundPlayer(Properties.Resources.receipt1);
-                    player.Play();
-
+                    player.PlayLooping();
                     receipttitleLabel.Text += $"\nRECEIPT\n";
                     Thread.Sleep(100);
                     Refresh();
@@ -273,6 +272,7 @@ namespace CashRegister
                     Thread.Sleep(100);
                     Refresh();
                     receiptLabel.Text += $"\nHave A Nice Day!";
+                    player.Stop();
                     Refresh();
                 }
             }
