@@ -34,6 +34,7 @@ namespace CashRegister
         double taxCharge;
         double sizePrice;
         bool sizeCheck = false;
+        int numberOfPizza;
 
         public Form1()
         {
@@ -70,6 +71,8 @@ namespace CashRegister
             pineappleButton.Enabled = true;
             mushroomButton.Enabled = true;
             onionButton.Enabled = true;
+
+            numberOfPizza = 1;
         }
 
         private void smallButton_Click(object sender, EventArgs e)
@@ -91,6 +94,8 @@ namespace CashRegister
             pineappleButton.Enabled = true;
             mushroomButton.Enabled = true;
             onionButton.Enabled = true;
+
+            numberOfPizza = 1;
         }
 
         private void medButton_Click(object sender, EventArgs e)
@@ -98,6 +103,8 @@ namespace CashRegister
             smallButton.Enabled = false;
             medButton.Enabled = false;
             lrgButton.Enabled = false;
+
+            numberOfPizza = 1;
 
             pizzaSizeLabel.Text = "Medium Pizza:";
             sizeCheck = true;
@@ -219,7 +226,7 @@ namespace CashRegister
                     receipttitleLabel.Text += $"\nPINOS PIZZA";
                     Thread.Sleep(100);
                     Refresh();
-                    receiptLabel.Text += $"\n1 {size} PIZZA\n";
+                    receiptLabel.Text += $"\n{numberOfPizza} {size} PIZZA\n";
                     pricingLabel.Text += $"\n{sizePrice}\n";
                     Thread.Sleep(100);
                     Refresh();
@@ -323,7 +330,11 @@ namespace CashRegister
             totalPriceLabel.Text = "";
             printreceiptButton.Enabled = true;
             calculateOrderButton.Enabled = true;
+            subtotal = 0;
             tenderErrorLabel.Text = "";
+            size = "";
+            sizePrice = 0;
+            numberOfPizza = 0;
         }
 
         // If the Calculate button is pressed, it sets the subtotal and total to their values, as well as displays the total
