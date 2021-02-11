@@ -92,5 +92,11 @@
   <ItemGroup>
     <None Include="Resources\5c0798c72c6641059597e35e.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\78946__engreitz__atm-print-receipt.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\receipt1.wav" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

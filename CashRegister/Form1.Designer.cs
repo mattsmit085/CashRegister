@@ -29,6 +29,7 @@ namespace CashRegister
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.label1 = new System.Windows.Forms.Label();
             this.sizeLabel = new System.Windows.Forms.Label();
             this.smallButton = new System.Windows.Forms.Button();
@@ -41,7 +42,7 @@ namespace CashRegister
             this.mushroomButton = new System.Windows.Forms.Button();
             this.orderLabel = new System.Windows.Forms.Label();
             this.ordertitleLabel = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.printreceiptButton = new System.Windows.Forms.Button();
             this.neworderButton = new System.Windows.Forms.Button();
             this.receiptLabel = new System.Windows.Forms.Label();
             this.onionButton = new System.Windows.Forms.Button();
@@ -52,6 +53,8 @@ namespace CashRegister
             this.pricingLabel = new System.Windows.Forms.Label();
             this.pizzaSizeLabel = new System.Windows.Forms.Label();
             this.tenderErrorLabel = new System.Windows.Forms.Label();
+            this.calculateOrderButton = new System.Windows.Forms.Button();
+            this.totalPriceLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -166,7 +169,6 @@ namespace CashRegister
             this.orderLabel.Name = "orderLabel";
             this.orderLabel.Size = new System.Drawing.Size(121, 270);
             this.orderLabel.TabIndex = 14;
-            this.orderLabel.Click += new System.EventHandler(this.orderLabel_Click);
             // 
             // ordertitleLabel
             // 
@@ -179,15 +181,15 @@ namespace CashRegister
             this.ordertitleLabel.TabIndex = 15;
             this.ordertitleLabel.Text = "Order:";
             // 
-            // button1
+            // printreceiptButton
             // 
-            this.button1.Location = new System.Drawing.Point(16, 368);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(117, 29);
-            this.button1.TabIndex = 16;
-            this.button1.Text = "Calculate Order";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.printreceiptButton.Location = new System.Drawing.Point(16, 368);
+            this.printreceiptButton.Name = "printreceiptButton";
+            this.printreceiptButton.Size = new System.Drawing.Size(117, 29);
+            this.printreceiptButton.TabIndex = 16;
+            this.printreceiptButton.Text = "Print Receipt";
+            this.printreceiptButton.UseVisualStyleBackColor = true;
+            this.printreceiptButton.Click += new System.EventHandler(this.calculateButton_Click);
             // 
             // neworderButton
             // 
@@ -242,7 +244,6 @@ namespace CashRegister
             this.tenderedInput.Name = "tenderedInput";
             this.tenderedInput.Size = new System.Drawing.Size(39, 20);
             this.tenderedInput.TabIndex = 27;
-            this.tenderedInput.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 
@@ -278,12 +279,32 @@ namespace CashRegister
             this.tenderErrorLabel.TabIndex = 31;
             this.tenderErrorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // calculateOrderButton
+            // 
+            this.calculateOrderButton.Location = new System.Drawing.Point(185, 277);
+            this.calculateOrderButton.Name = "calculateOrderButton";
+            this.calculateOrderButton.Size = new System.Drawing.Size(117, 29);
+            this.calculateOrderButton.TabIndex = 32;
+            this.calculateOrderButton.Text = "Calculate Order";
+            this.calculateOrderButton.UseVisualStyleBackColor = true;
+            this.calculateOrderButton.Click += new System.EventHandler(this.calculateOrderButton_Click);
+            // 
+            // totalPriceLabel
+            // 
+            this.totalPriceLabel.Location = new System.Drawing.Point(186, 309);
+            this.totalPriceLabel.Name = "totalPriceLabel";
+            this.totalPriceLabel.Size = new System.Drawing.Size(116, 23);
+            this.totalPriceLabel.TabIndex = 33;
+            this.totalPriceLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = global::CashRegister.Properties.Resources._213;
             this.ClientSize = new System.Drawing.Size(527, 409);
+            this.Controls.Add(this.totalPriceLabel);
+            this.Controls.Add(this.calculateOrderButton);
             this.Controls.Add(this.tenderErrorLabel);
             this.Controls.Add(this.pizzaSizeLabel);
             this.Controls.Add(this.pricingLabel);
@@ -294,7 +315,7 @@ namespace CashRegister
             this.Controls.Add(this.greenpepperButton);
             this.Controls.Add(this.neworderButton);
             this.Controls.Add(this.receiptLabel);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.printreceiptButton);
             this.Controls.Add(this.ordertitleLabel);
             this.Controls.Add(this.orderLabel);
             this.Controls.Add(this.mushroomButton);
@@ -307,6 +328,7 @@ namespace CashRegister
             this.Controls.Add(this.smallButton);
             this.Controls.Add(this.sizeLabel);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Form1";
             this.Text = "CashRegister";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -329,7 +351,7 @@ namespace CashRegister
         private System.Windows.Forms.Button mushroomButton;
         private System.Windows.Forms.Label orderLabel;
         private System.Windows.Forms.Label ordertitleLabel;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button printreceiptButton;
         private System.Windows.Forms.Button neworderButton;
         private System.Windows.Forms.Label receiptLabel;
         private System.Windows.Forms.Button onionButton;
@@ -340,6 +362,8 @@ namespace CashRegister
         private System.Windows.Forms.Label pricingLabel;
         private System.Windows.Forms.Label pizzaSizeLabel;
         private System.Windows.Forms.Label tenderErrorLabel;
+        private System.Windows.Forms.Button calculateOrderButton;
+        private System.Windows.Forms.Label totalPriceLabel;
     }
 }
 
