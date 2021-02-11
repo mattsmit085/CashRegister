@@ -36,7 +36,7 @@ namespace CashRegister
         bool sizeCheck = false;
 
         public Form1()
-        { 
+        {
             InitializeComponent();
 
             receipttitleLabel.Visible = false;
@@ -48,8 +48,9 @@ namespace CashRegister
             pineappleButton.Enabled = false;
             mushroomButton.Enabled = false;
             onionButton.Enabled = false;
+            printreceiptButton.Enabled = true;
         }
- 
+
         // If the size buttons are clicked, It adds the size price to the receipt, and writes the size name
         private void lrgButton_Click(object sender, EventArgs e)
         {
@@ -60,7 +61,7 @@ namespace CashRegister
             size = "LARGE";
             sizeCheck = true;
             sizePrice = 18.25;
-           pizzaSizeLabel.Text = "Large Pizza:";
+            pizzaSizeLabel.Text = "Large Pizza:";
             Convert.ToString(largePrice);
             subtotal += largePrice;
             pepperoniButton.Enabled = true;
@@ -112,7 +113,7 @@ namespace CashRegister
             mushroomButton.Enabled = true;
             onionButton.Enabled = true;
         }
-        
+
         // Adds topping price to subtotal, writes topping name to order label
         private void pepperoniButton_Click(object sender, EventArgs e)
         {
@@ -160,60 +161,47 @@ namespace CashRegister
         // resets the receipt strings if the button is clicked
         private void calculateButton_Click(object sender, EventArgs e)
         {
-            printreceiptButton.Enabled = false;
-           
-            receiptLabel.Text = "";
-            pricingLabel.Text = "";
-            tendered = Convert.ToDouble(tenderedInput.Text);
+            try
+            {
 
-           
-            // sets TOTAL and SUBTOTAL to their values
-            total = subtotal * tax;
-            taxCharge = subtotal * tax - subtotal;
+
+                printreceiptButton.Enabled = true;
+                calculateOrderButton.Enabled = false;
+                receiptLabel.Text = "";
+                pricingLabel.Text = "";
+
+                tendered = Convert.ToDouble(tenderedInput.Text);
+
+                // sets TOTAL and SUBTOTAL to their values
+                total = subtotal * tax;
+                taxCharge = subtotal * tax - subtotal;
 
             // checks to see if there is a value entered in the tendered section. If there is none, it sets everything back to the way the program starts
-            if (tenderedInput.Text == "")
- 
 
+
+
+                    // if theres a value that is less than the total, it displays a message
+                if (tendered < total)
                 {
-                    tenderErrorLabel.Text = "Please Insert the Tendered Amount";
-                    
-                    smallButton.Enabled = true;
-                    medButton.Enabled = true;
-                    lrgButton.Enabled = true;
-                    pepperoniButton.Enabled = true;
-                    extrachzButton.Enabled = true;
-                    greenpepperButton.Enabled = true;
-                    pineappleButton.Enabled = true;
-                    mushroomButton.Enabled = true;
-                    onionButton.Enabled = true;
-                    receipttitleLabel.Visible = false;
+                    tendered = Convert.ToDouble(tenderedInput.Text);
+                    tenderErrorLabel.Text = "Invalid Change! Please place a new order!";
                     receiptLabel.Enabled = false;
-                    
-                    orderLabel.Text = "";
-                    subtotal = 0;
-                    pricingLabel.Text = "";
-                    pizzaSizeLabel.Text = "";
-
-                    pepperoni = 0;
-                    extracheese = 0;
-                    greenpeppers = 0;
-                    pineapple = 0;
-                    mushroom = 0;
-                    onions = 0;
-                }
-
-                // if theres a value that is less than the total, it displays a message
-                else if (tendered < total)
-                {
-                    tenderErrorLabel.Text = "Invalid Change!";
+                    smallButton.Enabled = false;
+                    medButton.Enabled = false;
+                    lrgButton.Enabled = false;
+                    pepperoniButton.Enabled = false;
+                    extrachzButton.Enabled = false;
+                    greenpepperButton.Enabled = false;
+                    pineappleButton.Enabled = false;
+                    mushroomButton.Enabled = false;
+                    onionButton.Enabled = false;
+                    tenderedInput.Text = "";
                 }
 
                 // If there IS a value in the tendered section, It calculates the total and writes it out to the receipt.
                 else
                 {
-                   
-                    tenderErrorLabel.Text = "";
+                    tendered = Convert.ToDouble(tenderedInput.Text);
                     receiptLabel.Visible = true;
                     pricingLabel.Visible = true;
                     smallButton.Enabled = false;
@@ -293,20 +281,37 @@ namespace CashRegister
                     receiptLabel.Text += $"\nHave A Nice Day!";
                     Refresh();
                 }
+            }
+            catch
+            {
+                tenderedInput.Text = "0";
+                tenderErrorLabel.Text = "Invalid Change! Please place a new order!";
+                receiptLabel.Enabled = false;
+                smallButton.Enabled = false;
+                medButton.Enabled = false;
+                lrgButton.Enabled = false;
+                pepperoniButton.Enabled = false;
+                extrachzButton.Enabled = false;
+                greenpepperButton.Enabled = false;
+                pineappleButton.Enabled = false;
+                mushroomButton.Enabled = false;
+                onionButton.Enabled = false;
+                tenderedInput.Text = "";
+            }
         }
-       
+
         // if the new order button is clicked, it sets everything back to how it is at program run
         private void neworderButton_Click(object sender, EventArgs e)
         {
             smallButton.Enabled = true;
             medButton.Enabled = true;
             lrgButton.Enabled = true;
-            pepperoniButton.Enabled = true;
-            extrachzButton.Enabled = true;
-            greenpepperButton.Enabled = true;
-            pineappleButton.Enabled = true;
-            mushroomButton.Enabled = true;
-            onionButton.Enabled = true;
+            pepperoniButton.Enabled = false;
+            extrachzButton.Enabled = false;
+            greenpepperButton.Enabled = false;
+            pineappleButton.Enabled = false;
+            mushroomButton.Enabled = false;
+            onionButton.Enabled = false;
             receipttitleLabel.Visible = false;
             receiptLabel.Enabled = false;
             receiptLabel.Text = "";
@@ -322,6 +327,8 @@ namespace CashRegister
             onions = 0;
             totalPriceLabel.Text = "";
             printreceiptButton.Enabled = true;
+            calculateOrderButton.Enabled = true;
+            tenderErrorLabel.Text = "";
         }
 
         // If the Calculate button is pressed, it sets the subtotal and total to their values, as well as displays the total
@@ -331,5 +338,7 @@ namespace CashRegister
             taxCharge = subtotal * tax - subtotal;
             totalPriceLabel.Text = $"{total.ToString("C")}";
         }
+
+
     }
 }
