@@ -158,13 +158,11 @@ namespace CashRegister
             subtotal += toppingPrice;
         }
 
-        // resets the receipt strings if the button is clicked
+        // resets the receipt strings if the button is clicked, checks values in text box
         private void calculateButton_Click(object sender, EventArgs e)
         {
             try
             {
-
-
                 printreceiptButton.Enabled = true;
                 calculateOrderButton.Enabled = false;
                 receiptLabel.Text = "";
@@ -176,11 +174,7 @@ namespace CashRegister
                 total = subtotal * tax;
                 taxCharge = subtotal * tax - subtotal;
 
-            // checks to see if there is a value entered in the tendered section. If there is none, it sets everything back to the way the program starts
-
-
-
-                    // if theres a value that is less than the total, it displays a message
+                // if theres a value that is less than the total, it displays a message
                 if (tendered < total)
                 {
                     tendered = Convert.ToDouble(tenderedInput.Text);
@@ -282,6 +276,7 @@ namespace CashRegister
                     Refresh();
                 }
             }
+            // checks to see if there is a value entered in the tendered section. If there is none, it sets everything back to the way the program starts
             catch
             {
                 tenderedInput.Text = "0";
